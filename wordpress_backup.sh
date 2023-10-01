@@ -14,7 +14,7 @@ DB_BACKUP_FILE=$DB_BACKUP_DIR"shgh_wp_$YYYYMMDD.sql"
 WP_DIR="/home/ubuntu/test/"
 WP_TRANSFORM="s,^home/ubuntu/test,test,"
 DB_TRANSFORM='s,^home/ubuntu/DB,DB,'
-UPLOADS_DIR="/home/username/www/wp_content/uploads/"
+UPLOADS_DIR="/home/username/www/wp_content/uploads/*"
 
 # WP database credentials
 DB_USER="root"
