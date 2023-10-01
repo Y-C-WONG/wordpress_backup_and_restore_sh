@@ -33,7 +33,7 @@ fi
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
 
 # Create Wordpress backup file
-tar -cvf $DAILY_FILE --exclude="/home/ubuntu/test/10.txt" --transform $WP_TRANSFORM $WP_DIR
+tar -cvf $DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR
 
 # Append the database sql file to the archive and remove the sql file
 tar --append --file=$DAILY_FILE --transform $DB_TRANSFORM $DB_BACKUP_FILE
