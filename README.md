@@ -1,6 +1,6 @@
 # wordpress_backup_sh
 
-A very basic shall script for linux OS to backup wordpress and its database.
+A very basic shall script for linux OS to backup wordpress and its database which they are both in the same machine.
 You can use crontab to setup backup schedule.
 
 To get the backup script, please enter below command in linux terminal
