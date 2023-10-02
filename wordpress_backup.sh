@@ -31,13 +31,13 @@ HOUSEKEEP="1"
 if [ $1 = "-h" ] && [ $2 = "0" ]
 then 
     HOUSEKEEP="0"
-fi 
+fi
 
 # Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
 
 # Create Wordpress backup file
-tar -cvf $DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR
+tar -cvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR
 
 # Append the database sql file to the archive and remove the sql files
 tar --append --file=$BACKUP_DIR$DAILY_FILE --transform $DB_TRANSFORM $DB_BACKUP_FILE
