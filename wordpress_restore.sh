@@ -20,24 +20,24 @@ DB_USER="root"    # wordpress database username with backup premmission
 DB_PASS="password"    # password of the wordpress database user
 DB_NAME="wp_db"    # wordpress database name
 
-# Create database backup
+# STEP 1 : Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
 
-# Create Wordpress backup file
+# STEP 2 : Create Wordpress backup file
 tar -cvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR
 
-# Append the database sql file to the archive and remove the sql files
+# STEP 3 : Append the database sql file to the archive and remove the sql files
 tar --append --file=$BACKUP_DIR$DAILY_FILE --transform $DB_TRANSFORM $DB_BACKUP_FILE
 rm $DB_BACKUP_FILE
 
-# Extract the file from the restore achrive
+# STEP 4 : Extract the file from the restore achrive
 tar -xzf $BACKUP_DIR$BACKUP_ARCHIVE_FILE
 
-# Remove all the file in the WP_DIR
+# STEP 5 : Remove all the file in the WP_DIR
 rm -rf $WP_DIR
 
-# Move all the wordpress files extracted from the tar into the wordpress directory
+# STEP 6 : Move all the wordpress files extracted from the tar into the wordpress directory
 mv $BACKUP_DIR/html/* $WP_DIR
 
-# Import the sql file into the wordpress database
+# STEP 7 :  Import the sql file into the wordpress database
 mariadb -u$DB_USER -p$DB_PASS $DB_NAME < $BACKUP_DIR/DB/*.sql
