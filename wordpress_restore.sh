@@ -1,7 +1,11 @@
 #!/bin/bash
 
+#####
 # This script restore wordpress site with a archive tar.gz file which is backup by wordpress_backup.sh
+# It is suggest to run the following step by step (step order mark in the comment) rather then run at once.
+# 
 # Author: Yau Chuen Wong in October, 2023
+#####
 
 YYYYMMDD=$(date +"%Y%m%d");    # today date in YYYMMDD format
 DAILY_FILE="shgh_wp_"$YYYYMMDD"_bak.tar.gz"    # Daily backup archive file name 
