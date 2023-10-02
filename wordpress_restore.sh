@@ -35,7 +35,7 @@ tar --append --file=$BACKUP_DIR$DAILY_FILE --transform $DB_TRANSFORM $DB_BACKUP_
 rm $DB_BACKUP_FILE
 
 # STEP 4 : Extract the file from the restore achrive
-tar -xzf $BACKUP_DIR$BACKUP_ARCHIVE_FILE
+tar -xzf $BACKUP_DIR$RESTORE_FILE
 
 # STEP 5 : Remove all the file in the WP_DIR
 rm -rf $WP_DIR
