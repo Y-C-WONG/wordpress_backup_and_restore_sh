@@ -44,7 +44,7 @@ tar --append --file=$BACKUP_DIR$DAILY_FILE --transform $DB_TRANSFORM $DB_BACKUP_
 rm $DB_BACKUP_FILE
 
 # Housekeeping, keep most recent 7 backup file
-if [“$HOUSEKEEP” = “1”]
+if [ $HOUSEKEEP = "1" ]
 then
 ls -tp $BACKUP_DIR | grep -v "/$" | tail -n +8| xargs -I {} rm $BACKUP_DIR/{}
 fi
