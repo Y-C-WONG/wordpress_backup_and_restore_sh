@@ -14,7 +14,7 @@ DB_BACKUP_DIR=$BACKUP_DIR    # DB backup .sql location
 DB_BACKUP_FILE=$DB_BACKUP_DIR"shgh_wp_$YYYYMMDD.sql"    # DB backup .sql file name and location
 WP_DIR="/var/www/html/"    # Wordpress directory
 WP_TRANSFORM="s,^var/www/html,html," # change directory structure while tar for Wordpress file
-DB_TRANSFORM='s,^home/bak,DB,'    # chage directory structure while append ,sql file into the tar
+DB_TRANSFORM="s,^home/bak,DB,"    # chage directory structure while append ,sql file into the tar
 UPLOADS_DIR="/var/www/html/wp-content/uploads/*"    # skip the file in wordpress uploads directory (for daily backup only)
 
 # WP database credentials
