@@ -7,6 +7,7 @@ To get the script, please enter below command in linux terminal
 ---------------------
 
 curl -O https://raw.githubusercontent.com/Y-C-WONG/wordpress_backup_and_restore_sh/main/wordpress_backup.sh
+
 curl -O https://raw.githubusercontent.com/Y-C-WONG/wordpress_backup_and_restore_sh/main/wordpress_restore.sh
 
 --------------------
