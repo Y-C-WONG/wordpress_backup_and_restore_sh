@@ -28,10 +28,12 @@ DB_NAME="wp_db"    # wordpress database name
 # e.g. xxxx.sh -h 1 ----> backup wordpress then do the house keeping
 # e.g. xxxx.sh -h 0 ----> backup wordpress without house keeping
 HOUSEKEEP="1"
-if [ $1 = "-h" ] && [ $2 = "0" ]
-then 
-    HOUSEKEEP="0"
-fi
+while getopts h: flag
+do
+    case "${flag}" in
+        h) [ ! -z "${OPTARG}" ] && HOUSEKEEP="${OPTARG}";;
+    esac
+done
 
 # Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
