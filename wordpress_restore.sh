@@ -38,7 +38,7 @@ tar -xzvf $BACKUP_DIR$RESTORE_FILE
 rm -rf $WP_DIR
 
 # STEP 5 : Move all the wordpress files extracted from the tar into the wordpress directory
-mv $BACKUP_DIR/html/* $WP_DIR
+mv $BACKUP_DIR/html/{.[!.],}* $WP_DIR
 
 # STEP 6 :  Import the sql file into the wordpress database
 mariadb -u$DB_USER -p$DB_PASS $DB_NAME < $BACKUP_DIR/DB/*.sql
