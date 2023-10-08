@@ -23,7 +23,7 @@ DB_PASS="password"    # password of the wordpress database user
 DB_NAME="wp_db"    # wordpress database name
 
 
-# Read args to determine need housekeep or not
+# Read args "-h" to determine need housekeep or not
 # e.g. xxxx.sh  ----> [default] backup wordpress then do the house keeping
 # e.g. xxxx.sh -h 1 ----> backup wordpress then do the house keeping
 # e.g. xxxx.sh -h 0 ----> backup wordpress without house keeping
