@@ -28,7 +28,7 @@ DB_NAME="wp_db"    # wordpress database name
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
 
 # STEP 2 : Create Wordpress backup file
-tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
+tar -czvf $BACKUP_DIR$DAILY_FILE --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
 rm $DB_BACKUP_FILE
 
 # STEP 3 : Extract the file from the restore achrive
