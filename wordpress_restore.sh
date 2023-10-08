@@ -31,14 +31,14 @@ mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
 tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
 rm $DB_BACKUP_FILE
 
-# STEP 4 : Extract the file from the restore achrive
+# STEP 3 : Extract the file from the restore achrive
 tar -xzvf $BACKUP_DIR$RESTORE_FILE
 
-# STEP 5 : Remove all the file in the WP_DIR
+# STEP 4 : Remove all the file in the WP_DIR
 rm -rf $WP_DIR
 
-# STEP 6 : Move all the wordpress files extracted from the tar into the wordpress directory
+# STEP 5 : Move all the wordpress files extracted from the tar into the wordpress directory
 mv $BACKUP_DIR/html/* $WP_DIR
 
-# STEP 7 :  Import the sql file into the wordpress database
+# STEP 6 :  Import the sql file into the wordpress database
 mariadb -u$DB_USER -p$DB_PASS $DB_NAME < $BACKUP_DIR/DB/*.sql
