@@ -38,6 +38,7 @@ tar -xzvf $BACKUP_DIR$RESTORE_FILE
 rm -rf $WP_DIR
 
 # STEP 5 : Move all the wordpress files extracted from the tar into the wordpress directory
+# {.[!.],}* = all files include files name start with "." and ignore  "." and ".." directories
 mv $BACKUP_DIR/html/{.[!.],}* $WP_DIR
 
 # STEP 6 :  Import the sql file into the wordpress database
