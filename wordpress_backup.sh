@@ -22,8 +22,6 @@ DB_USER="root"    # wordpress database username with backup premmission
 DB_PASS="password"    # password of the wordpress database user
 DB_NAME="wp_db"    # wordpress database name
 
-. wp_config.sh
-
 # Read args "-h" to determine need housekeep or not
 # e.g. xxxx.sh  ----> [default] backup wordpress then do the house keeping
 # e.g. xxxx.sh -h 1 ----> backup wordpress then do the house keeping
@@ -35,6 +33,8 @@ do
         h) [ ! -z "${OPTARG}" ] && HOUSEKEEP="${OPTARG}";;
     esac
 done
+
+. wp_config.sh
 
 # Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
