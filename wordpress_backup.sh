@@ -22,6 +22,7 @@ DB_USER="root"    # wordpress database username with backup premmission
 DB_PASS="password"    # password of the wordpress database user
 DB_NAME="wp_db"    # wordpress database name
 
+. wp_config.sh
 
 # Read args "-h" to determine need housekeep or not
 # e.g. xxxx.sh  ----> [default] backup wordpress then do the house keeping
