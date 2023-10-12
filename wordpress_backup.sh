@@ -22,19 +22,52 @@ DB_USER="root"    # wordpress database username with backup premmission
 DB_PASS="password"    # password of the wordpress database user
 DB_NAME="wp_db"    # wordpress database name
 
-# Read args "-h" to determine need housekeep or not
-# e.g. xxxx.sh  ----> [default] backup wordpress then do the house keeping
-# e.g. xxxx.sh -h 1 ----> backup wordpress then do the house keeping
-# e.g. xxxx.sh -h 0 ----> backup wordpress without house keeping
+. wp_config.sh
 HOUSEKEEP="1"
-while getopts h: flag
+
+function _usage() 
+{
+  ###### U S A G E : Help and ERROR ######
+  cat <<EOF
+   wordpress_backup.sh $Options
+  $*
+          Usage: wordpress_backup.sh <[options]>
+          Options:
+                  -a    Backup all wordpress directory (include "wp-content/uploads/*")
+                            e.g. xxx.sh : [default] backup without "wp-content/uploads/*")
+                            e.g. xxx.sh -a : backup all wordpress directory (include "wp-content/uploads/*")
+                  -k    Set to 1 if need housekeeping (keep 3 latest archive copy and delete others)
+                            e.g. xxxx.sh : [default] backup wordpress then do the housekeeping
+                            e.g. xxxx.sh -k 1 : backup wordpress then do the housekeeping
+                            e.g. xxxx.sh -k 0 : backup wordpress without housekeeping
+                  -h    Show this message
+EOF
+}
+
+# Read args "-k" to determine need housekeep or not
+# e.g. xxxx.sh  ----> [default] backup wordpress then do the house keeping
+# e.g. xxxx.sh -k 1 ----> backup wordpress then do the house keeping
+# e.g. xxxx.sh -k 0 ----> backup wordpress without house keeping
+#########
+# Read args  "-a" to backup all wp-dir (include wp-content/uploads/*)
+# e.g. xxx.sh ----> [default] backup without wp-content/uploads/*)
+# e.g. xxx.sh -a ------> backup all wp-dir (include wp-content/uploads/*)
+
+while getopts h:k:a: flag
 do
     case "${flag}" in
-        h) [ ! -z "${OPTARG}" ] && HOUSEKEEP="${OPTARG}";;
+        h) 
+          _usage
+          exit 0
+          ;;
+        k) 
+          [ ! -z "${OPTARG}" ] && HOUSEKEEP="${OPTARG}"
+          ;;
+        a)
+          UPLOADS_DIR=""
+          ;;
     esac
 done
-
-. wp_config.sh
 
 # Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
