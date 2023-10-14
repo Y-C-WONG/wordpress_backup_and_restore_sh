@@ -79,7 +79,8 @@ do
           ;;
         a)
           A_BACKUP="1"
-          DB_BACKUP_DIR=$ALL_BAK_DIR
+          BACKUP_DIR=$ALL_BAK_DIR
+          DB_BACKUP_DIR=$BACKUP_DIR
           DB_BACKUP_FILE=$DB_BACKUP_DIR$SQL_FILE
           ;;
         \?)
@@ -116,7 +117,7 @@ if [ $A_BACKUP == "0" ]
 then
     tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
 else
-    tar -czvf $ALL_BAK_DIR$MONTHLY_FILE --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
+    tar -czvf $BACKUP_DIR$MONTHLY_FILE --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
 fi
 
 # Remove the sql files
