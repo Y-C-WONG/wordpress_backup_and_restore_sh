@@ -6,7 +6,9 @@ You can use crontab to setup the backup schedule.
 To get the script, you can either pull this repos or enter below command in linux terminal
 ---------------------
 
+'''text
 curl -O https://raw.githubusercontent.com/Y-C-WONG/wordpress_backup_and_restore_sh/main/wp_config.sh  
+'''
 [download](https://raw.githubusercontent.com/Y-C-WONG/wordpress_backup_and_restore_sh/main/wp_config.sh)
 
 curl -O https://raw.githubusercontent.com/Y-C-WONG/wordpress_backup_and_restore_sh/main/wordpress_backup.sh  
