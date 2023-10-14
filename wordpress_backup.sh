@@ -29,9 +29,10 @@ function _usage()
 {
   ###### U S A G E : Help and ERROR ######
   cat <<EOF
-   wordpress_backup.sh $Options
   $*
-          Usage: wordpress_backup.sh <[options]>
+          Usage: wordpress_backup.sh [-a] [-k 1|0] [-h]
+                 Run wordpress_backup.sh without options will perform housekeeping and 
+                 backup without "uploads/*" directory
           Options:
           -a    Backup all wordpress directory (include "wp-content/uploads/*")
                 e.g. xxx.sh : [default] backup without "wp-content/uploads/*")
@@ -55,7 +56,7 @@ EOF
 # e.g. xxx.sh ----> [default] backup without wp-content/uploads/*)
 # e.g. xxx.sh -a ------> backup all wp-dir (include wp-content/uploads/*)
 
-while getopts hka flag
+while getopts :hk:a flag
 do
     case "${flag}" in
         h) 
@@ -63,14 +64,39 @@ do
           exit 0
           ;;
         k) 
-          [ ! -z "${OPTARG}" ] && HOUSEKEEP="${OPTARG}"
+          if [ "${OPTARG}" == "1" ] || [ "${OPTARG}" == 0 ]
+          then
+             k="${OPTARG}"
+          else
+             echo "Invalid option: -$OPTARG"
+             _usage
+             exit 1
+          fi
           ;;
         a)
           UPLOADS_DIR=""
           ;;
+        \?)
+          echo "Invalid option: -$OPTARG"
+          _usage
+          exit 1
+          ;;
     esac
 done
 shift "$((OPTIND-1))"
+
+if [ ! -z "${k}" ];
+then
+    HOUSEKEEP="${k}"
+fi
+
+echo "K setting: "$k
+echo "DAILY_FILE SETTING: "$DAILY_FILE
+echo "BACKUP_DIR SETTING: "$BACKUP_DIR
+echo "DB_BACKUP_FILE SETTING: " $DB_BACKUP_FILE
+echo "WP_DIR SETTING: "$WP_DIR
+echo "HOUSEKEEPING SETTING: "$HOUSEKEEP
+echo "UPLOADS_DIR SETTING: "$UPLOADS_DIR
 
 # Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
