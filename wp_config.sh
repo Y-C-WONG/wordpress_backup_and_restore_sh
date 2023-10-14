@@ -9,7 +9,7 @@ MONTHLY_FILE="shgh_wp_"$YYYYMMM".tar.gz"    # Monthly backup archive file name
 DAILY_FILE="shgh_wp_"$YYYYMMDD".tar.gz"    # Daily backup archive file name 
 # Need to update below accordingly
 BACKUP_DIR="/home/bak/"    # Backup archive file location
-ALL_BAK_DIR="/home/bak/monthly/"
+ALL_BAK_DIR="/home/bak/monthly/"  # Monthly backup archive file location
 DB_BACKUP_DIR=$BACKUP_DIR    # DB backup .sql location
 SQL_FILE="shgh_wp_"$YYYYMMDD".sql"
 DB_BACKUP_FILE=$DB_BACKUP_DIR$SQL_FILE    # DB backup .sql file name and location
