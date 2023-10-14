@@ -83,7 +83,7 @@ do
           BACKUP_DIR=$ALL_BAK_DIR
           DB_BACKUP_DIR=$BACKUP_DIR
           DB_BACKUP_FILE=$DB_BACKUP_DIR$SQL_FILE
-          KEEP_BACKUP=3
+          KEEP_BACKUP=3    # Only keep 2 archive copy if backup the uploads folder.
           ;;
         \?)
           echo "Invalid option: -$OPTARG"
