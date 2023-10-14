@@ -70,6 +70,7 @@ do
           ;;
     esac
 done
+shift "$((OPTIND-1))"
 
 # Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
