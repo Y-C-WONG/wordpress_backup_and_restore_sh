@@ -10,8 +10,10 @@ MONTHLY_FILE="shgh_wp_"$YYYYMMM".tar.gz"    # Monthly backup archive file name
 DAILY_FILE="shgh_wp_"$YYYYMMDD".tar.gz"    # Daily backup archive file name 
 # Need to update below accordingly
 BACKUP_DIR="/home/bak/"    # Backup archive file location
+ALL_BAK_DIR="/home/bak/monthly/"
 DB_BACKUP_DIR=$BACKUP_DIR    # DB backup .sql location
-DB_BACKUP_FILE=$DB_BACKUP_DIR"shgh_wp_$YYYYMMDD.sql"    # DB backup .sql file name and location
+SQL_FILE="shgh_wp_"$YYYYMMDD".sql"
+DB_BACKUP_FILE=$DB_BACKUP_DIR$SQL_FILE    # DB backup .sql file name and location
 WP_DIR="/var/www/html/"    # Wordpress directory
 WP_TRANSFORM="s,^var/www/html,html," # change directory structure while tar for Wordpress file
 DB_TRANSFORM="s,^home/bak,DB,"    # chage directory structure while append ,sql file into the tar
@@ -25,6 +27,7 @@ DB_NAME="wp_db"    # wordpress database name
 SRC_DIR=$(dirname "$0")"/"
 . $SRC_DIR"wp_config.sh"
 HOUSEKEEP="1"
+A_BACKUP="0"
 
 function _usage() 
 {
@@ -75,7 +78,9 @@ do
           fi
           ;;
         a)
-          UPLOADS_DIR=""
+          A_BACKUP="1"
+          DB_BACKUP_DIR=$ALL_BAK_DIR
+          DB_BACKUP_FILE=$DB_BACKUP_DIR$SQL_FILE
           ;;
         \?)
           echo "Invalid option: -$OPTARG"
@@ -104,7 +109,12 @@ echo "UPLOADS_DIR SETTING: "$UPLOADS_DIR
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
 
 # Create Wordpress and database .sql backup file
-tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
+if [ $A_BACKUP == "0" ]
+then
+    tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
+else
+    tar -czvf $ALL_BAK_DIR$MONTHLY_FILE --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
+fi
 
 # Remove the sql files
 rm $DB_BACKUP_FILE
