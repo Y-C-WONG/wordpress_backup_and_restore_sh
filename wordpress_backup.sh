@@ -22,7 +22,8 @@ DB_USER="root"    # wordpress database username with backup premmission
 DB_PASS="password"    # password of the wordpress database user
 DB_NAME="wp_db"    # wordpress database name
 
-. wp_config.sh
+SRC_DIR=$(dirname "$0")"/"
+. $SRC_DIR"wp_config.sh"
 HOUSEKEEP="1"
 
 function _usage() 
@@ -90,6 +91,7 @@ then
     HOUSEKEEP="${k}"
 fi
 
+echo "SRC_DIR: "$SRC_DIR
 echo "K setting: "$k
 echo "DAILY_FILE SETTING: "$DAILY_FILE
 echo "BACKUP_DIR SETTING: "$BACKUP_DIR
