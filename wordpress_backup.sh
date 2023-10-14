@@ -125,7 +125,7 @@ fi
 # Remove the sql files
 rm $DB_BACKUP_FILE
 
-# Housekeeping, keep most recent 3 backup file
+# Housekeeping, keep most recent "$KEEP_BACKUP" backup files
 if [ $HOUSEKEEP = "1" ]
 then
 ls -tp $BACKUP_DIR | grep -v "/$" | tail -n +$KEEP_BACKUP| xargs -I {} rm $BACKUP_DIR/{}
