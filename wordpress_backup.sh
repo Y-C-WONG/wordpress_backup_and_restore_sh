@@ -28,6 +28,7 @@ SRC_DIR=$(dirname "$0")"/"
 . $SRC_DIR"wp_config.sh"
 HOUSEKEEP="1"
 A_BACKUP="0"
+KEEP_BACKUP=4   # number of latest backup copy in the directory, remove other.  e.g keep 3 copy, set to 4  
 
 function _usage() 
 {
@@ -82,6 +83,7 @@ do
           BACKUP_DIR=$ALL_BAK_DIR
           DB_BACKUP_DIR=$BACKUP_DIR
           DB_BACKUP_FILE=$DB_BACKUP_DIR$SQL_FILE
+          KEEP_BACKUP=3
           ;;
         \?)
           echo "Invalid option: -$OPTARG"
@@ -126,5 +128,5 @@ rm $DB_BACKUP_FILE
 # Housekeeping, keep most recent 3 backup file
 if [ $HOUSEKEEP = "1" ]
 then
-ls -tp $BACKUP_DIR | grep -v "/$" | tail -n +4| xargs -I {} rm $BACKUP_DIR/{}
+ls -tp $BACKUP_DIR | grep -v "/$" | tail -n +$KEEP_BACKUP| xargs -I {} rm $BACKUP_DIR/{}
 fi
