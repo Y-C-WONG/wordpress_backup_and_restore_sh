@@ -33,14 +33,16 @@ function _usage()
   $*
           Usage: wordpress_backup.sh <[options]>
           Options:
-                  -a    Backup all wordpress directory (include "wp-content/uploads/*")
-                            e.g. xxx.sh : [default] backup without "wp-content/uploads/*")
-                            e.g. xxx.sh -a : backup all wordpress directory (include "wp-content/uploads/*")
-                  -k    Set to 1 if need housekeeping (keep 3 latest archive copy and delete others)
-                            e.g. xxxx.sh : [default] backup wordpress then do the housekeeping
-                            e.g. xxxx.sh -k 1 : backup wordpress then do the housekeeping
-                            e.g. xxxx.sh -k 0 : backup wordpress without housekeeping
-                  -h    Show this message
+          -a    Backup all wordpress directory (include "wp-content/uploads/*")
+                e.g. xxx.sh : [default] backup without "wp-content/uploads/*")
+                e.g. xxx.sh -a : backup all wordpress directory (include "wp-content/uploads/*")
+                
+          -k    Set to 1 if need housekeeping (keep 3 latest archive copy and delete others)
+                e.g. xxxx.sh : [default] backup wordpress then do the housekeeping
+                e.g. xxxx.sh -k 1 : backup wordpress then do the housekeeping
+                e.g. xxxx.sh -k 0 : backup wordpress without housekeeping
+                
+          -h    Show this message
 EOF
 }
 
