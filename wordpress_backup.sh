@@ -78,8 +78,8 @@ tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFOR
 # Remove the sql files
 rm $DB_BACKUP_FILE
 
-# Housekeeping, keep most recent 7 backup file
+# Housekeeping, keep most recent 3 backup file
 if [ $HOUSEKEEP = "1" ]
 then
-ls -tp $BACKUP_DIR | grep -v "/$" | tail -n +8| xargs -I {} rm $BACKUP_DIR/{}
+ls -tp $BACKUP_DIR | grep -v "/$" | tail -n +4| xargs -I {} rm $BACKUP_DIR/{}
 fi
