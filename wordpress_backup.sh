@@ -53,7 +53,7 @@ EOF
 # e.g. xxx.sh ----> [default] backup without wp-content/uploads/*)
 # e.g. xxx.sh -a ------> backup all wp-dir (include wp-content/uploads/*)
 
-while getopts hk:a: flag
+while getopts hka flag
 do
     case "${flag}" in
         h) 
