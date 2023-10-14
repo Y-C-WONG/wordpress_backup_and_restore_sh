@@ -106,6 +106,7 @@ echo "DB_BACKUP_FILE SETTING: " $DB_BACKUP_FILE
 echo "WP_DIR SETTING: "$WP_DIR
 echo "HOUSEKEEPING SETTING: "$HOUSEKEEP
 echo "UPLOADS_DIR SETTING: "$UPLOADS_DIR
+echo "A_BACKUP SETTING: "$A_BACKUP
 
 # Create database backup
 mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
