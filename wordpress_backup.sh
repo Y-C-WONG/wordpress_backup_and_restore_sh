@@ -99,6 +99,9 @@ then
     HOUSEKEEP="${k}"
 fi
 
+WP_LIST=$(< wp.list)    # Load the wp.list which is files of wordpress
+WP_FILES=$(echo $WP_DIR$WP_LIST | sed "s: : $WP_DIR:g")    #convert full path of every wordpress files
+
 echo "SRC_DIR: "$SRC_DIR
 echo "K setting: "$k
 echo "DAILY_FILE SETTING: "$DAILY_FILE
@@ -117,9 +120,9 @@ mariadb-dump --add-drop-table -u$DB_USER -p$DB_PASS $DB_NAME > $DB_BACKUP_FILE
 # Create Wordpress and database .sql backup file
 if [ $A_BACKUP == "0" ]
 then
-    tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
+    tar -czvf $BACKUP_DIR$DAILY_FILE --exclude=$UPLOADS_DIR --transform $WP_TRANSFORM $WP_FILES --transform $DB_TRANSFORM $DB_BACKUP_FILE
 else
-    tar -czvf $BACKUP_DIR$MONTHLY_FILE --transform $WP_TRANSFORM $WP_DIR --transform $DB_TRANSFORM $DB_BACKUP_FILE
+    tar -czvf $BACKUP_DIR$MONTHLY_FILE --transform $WP_TRANSFORM $WP_FILES --transform $DB_TRANSFORM $DB_BACKUP_FILE
 fi
 
 # Remove the sql files
