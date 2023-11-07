@@ -48,4 +48,4 @@ mariadb -u$DB_USER -p$DB_PASS $DB_NAME < $BACKUP_DIR/DB/*.sql
 
 # STEP 7 :  Import the sql file into the wordpress database
 # Please chnage the table name of 'wp_options' and option_value according to your environment setting 
-mariadb -u$DB_USER -p$DB_PASS -e 'update wp_options set option_value = 'localhost:8080' where option_id in (1,2);'  $DB_NAME
+mariadb -u$DB_USER -p$DB_PASS -e 'update wp_options set option_value = 'localhost:8080' where option_id in (1,2);' $DB_NAME
