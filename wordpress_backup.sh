@@ -99,7 +99,7 @@ then
     HOUSEKEEP="${k}"
 fi
 
-WP_LIST=$(< wp.list)    # Load the wp.list which is files of wordpress
+WP_LIST=$(< $SRC_DIR"wp.list")    # Load the wp.list which is files of wordpress
 WP_FILES=$(echo $WP_DIR$WP_LIST | sed "s: : $WP_DIR:g")    #convert full path of every wordpress files
 
 echo "SRC_DIR: "$SRC_DIR
